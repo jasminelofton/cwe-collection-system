@@ -6,6 +6,7 @@ import requests
 
 from bs4 import BeautifulSoup
 
+db_name = "cwe.db"
 
 def add_remaining_CWEs():
     
@@ -82,7 +83,44 @@ def add_remaining_CWEs():
         print(desc)
 
 
+connection = create_database(db_name)
 
+connection.execute("PRAGMA foreign_keys = 1")
 
-add_remaining_CWEs()
+cursor = connection.cursor()
 
+url = "https://cwe.mitre.org/data/definitions/89.html"
+
+page = requests.get(url)
+
+soup = BeautifulSoup(page.text, 'html.parser')
+
+retrieve_all_related(soup)
+
+sentences = retrieve_all_impacts(soup)
+
+rows = select_records_impacts_table(cursor)
+
+phrases = [row[1] for row in rows]
+
+matches = []
+for sentence in sentences:
+    for phrase in phrases:
+        if phrase.lower() in sentence.lower():
+            matches.append(phrase)
+
+print(set(matches))
+
+# sentences = retrieve_all_related(soup)
+
+# rows = select_records_related_table(cursor)
+
+# phrases = [row[1] for row in rows]
+
+# matches = []
+# for sentence in sentences:
+#     for phrase in phrases:
+#         if phrase.lower() in sentence.lower():
+#             matches.append(phrase)
+
+# print(set(matches))
