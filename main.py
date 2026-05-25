@@ -1,6 +1,6 @@
-from databasefunc import *
+from db import *
 
-from parser import *
+from scraper import *
 
 import requests
 
@@ -80,6 +80,9 @@ def add_remaining_CWEs():
         print(i)
         print(title)
         print(desc)
+
+
+
 
 add_remaining_CWEs()
 
