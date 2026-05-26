@@ -16,3 +16,17 @@ def insert_record_in_weakness_table(cwe_id, title, description, cursor, connecti
         """
     cursor.execute(sql_command, (cwe_id, title, description))
     connection.commit()
+
+
+def count_id_records_in_weaknesses_table(cwe_id, cursor):
+    sql_command = """
+        SELECT COUNT(cwe_id)
+        FROM Weaknesses w
+        WHERE w.cwe_id = (?)
+        """
+
+    cursor.execute(sql_command, (cwe_id,))
+    
+    return cursor.fetchone()[0]
+
+    

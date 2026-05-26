@@ -1,3 +1,5 @@
+#note: already added 'separation of privileges' so if you restart the table, this needs to be added manually
+
 import sys, os, csv
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
