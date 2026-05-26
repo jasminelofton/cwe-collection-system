@@ -85,31 +85,31 @@ def add_remaining_CWEs():
 
 connection = create_database(db_name)
 
-connection.execute("PRAGMA foreign_keys = 1")
+# connection.execute("PRAGMA foreign_keys = 1")
 
 cursor = connection.cursor()
 
-url = "https://cwe.mitre.org/data/definitions/89.html"
+# url = "https://cwe.mitre.org/data/definitions/90.html"
 
-page = requests.get(url)
+# page = requests.get(url)
 
-soup = BeautifulSoup(page.text, 'html.parser')
+# soup = BeautifulSoup(page.text, 'html.parser')
 
-retrieve_all_related(soup)
+# retrieve_all_related(soup)
 
-sentences = retrieve_all_impacts(soup)
+# sentences = retrieve_all_impacts(soup)
 
-rows = select_records_impacts_table(cursor)
+# rows = select_records_impacts_table(cursor)
 
-phrases = [row[1] for row in rows]
+# phrases = [row[1] for row in rows]
 
-matches = []
-for sentence in sentences:
-    for phrase in phrases:
-        if phrase.lower() in sentence.lower():
-            matches.append(phrase)
+# matches = []
+# for sentence in sentences:
+#     for phrase in phrases:
+#         if phrase.lower() in sentence.lower():
+#             matches.append(phrase)
 
-print(set(matches))
+# print(set(matches))
 
 # sentences = retrieve_all_related(soup)
 
@@ -124,3 +124,9 @@ print(set(matches))
 #             matches.append(phrase)
 
 # print(set(matches))
+
+
+records = select_all_records_relateds_to_weaknesses(cursor)
+
+for record in records:
+    print(record)
