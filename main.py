@@ -48,6 +48,8 @@ for i in range(1, total_cwes):
     title = get_title_string(soup)
     desc = get_description_string(soup)
     print(f'inserting cwe_{i} into database')
+    print(title)
+    print(desc)
     #insert_record_in_weakness_table(i, title, desc, cursor, connection)
 
     # Scrape all impact-related text from the page
